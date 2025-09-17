@@ -1,0 +1,25 @@
+        {
+            "name": "ROS2 Dev Container",
+            "build": {
+                "dockerfile": "Dockerfile"
+            },
+            "customizations": {
+                "vscode": {
+                    "extensions": [
+                        "ms-vscode.cpptools",
+                        "ms-python.python",
+                        "RoboticsContentLab.vscode-ros" // ROS extension for VS Code
+                    ]
+                }
+            },
+
+            // "runArgs": ["-e", "DISPLAY=host.docker.internal:0"],
+            // "postCreateCommand": "Xvfb :99 -screen 0 1024x768x24 & fluxbox &",
+            "runArgs": ["--network=host"],
+            // "postStartCommand": "Xvfb :1 -screen 0 1024x768x24 > /tmp/xvfb.log 2>&1 & sleep 2 && fluxbox > /tmp/fluxbox.log 2>&1 & sleep 2 && websockify --web=/usr/share/novnc/ 6080 localhost:5900 > /tmp/websockify.log 2>&1 &",
+            // "forwardPorts": [6080],
+            "remoteEnv": {
+                "DISPLAY": ":99"
+            }
+            // "initializeCommand": "echo 'export DISPLAY=:1' >> ~/.bashrc"
+        }

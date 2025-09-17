@@ -1,0 +1,70 @@
+%YAML 1.1
+---
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /MotionPlanning1
+  - Class: rviz_common/Help
+    Name: Help
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Alpha: 0.5
+      Cell Size: 1
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset: 0; 0; 0
+      Plane: XY
+      Plane Cell Count: 10
+      Value: true
+    - Class: rviz_default_plugins/RobotModel
+      Alpha: 1.0
+      Description Source: Topic
+      Description Topic: /robot_description
+      Enabled: true
+      Name: RobotModel
+      TF Prefix: ""
+      Value: true
+      Visual Enabled: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Name: TF
+      Show Axes: true
+      Show Names: true
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 2.0
+      Focal Point:
+        X: -0.1
+        Y: 0.25
+        Z: 0.30
+      Name: Current View
+      Pitch: 0.5
+      Target Frame: world
+      Yaw: -0.623
+    Saved: ~
+Window Geometry:
+  Height: 975
+  Width: 1200
