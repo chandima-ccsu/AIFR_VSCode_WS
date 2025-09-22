@@ -52,23 +52,23 @@ print(gray.shape) # Examin the dimensions
 # # Save result
 # cv2.imwrite('monadic_threshold_binary.jpg', gray)
 
-## Skewing
-# Apply gamma correction to skew histogram towards 255
-gamma = 0.5  # Gamma < 1 brightens image
-img_normalized = gray / 255.0 # Normalize the image
-skewed = np.power(img_normalized, gamma) * 255.0
-skewed = skewed.astype(np.uint8)
+# ## Skewing
+# # Apply gamma correction to skew histogram towards 255
+# gamma = 0.5  # Gamma < 1 brightens image
+# img_normalized = gray / 255.0 # Normalize the image
+# skewed = np.power(img_normalized, gamma) * 255.0
+# skewed = skewed.astype(np.uint8)
 
-# Save the skewed image
-cv2.imwrite('skewed_gray.jpg', skewed)
+# # Save the skewed image
+# cv2.imwrite('skewed_gray.jpg', skewed)
 
-hist = cv2.calcHist([skewed], [0], None, [256], [0, 256])
-plt.plot(hist)
-plt.title('Skewed Histogram')
-plt.xlabel('Pixel Value')
-plt.ylabel('Frequency')
-plt.savefig('histogram_skewed_gray.png')
-plt.close()
+# hist = cv2.calcHist([skewed], [0], None, [256], [0, 256])
+# plt.plot(hist)
+# plt.title('Skewed Histogram')
+# plt.xlabel('Pixel Value')
+# plt.ylabel('Frequency')
+# plt.savefig('histogram_skewed_gray.png')
+# plt.close()
 
 
 
