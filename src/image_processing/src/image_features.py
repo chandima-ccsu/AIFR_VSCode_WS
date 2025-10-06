@@ -27,7 +27,7 @@ import pdb
 
 ## Color image classification
 
-tmt = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg')
+# tmt = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg')
 
 # # Convert the BGR image to LAB
 # lab_tmt = cv2.cvtColor(tmt, cv2.COLOR_BGR2LAB)
@@ -102,32 +102,32 @@ tmt = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg
 
 ## Object Instance Representation
 
-tmt_binary = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg', cv2.IMREAD_GRAYSCALE)
+# tmt_binary = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg', cv2.IMREAD_GRAYSCALE)
 
-# Detect blobs using SimpleBlobDetector
-params = cv2.SimpleBlobDetector_Params()
-params.filterByArea = True
-params.minArea = 1000
-params.maxArea = 100000
-params.filterByCircularity = False
-params.filterByConvexity = False  # Disabled for broader detection
-params.filterByInertia = False  # Disabled for flexibility
+# # Detect blobs using SimpleBlobDetector
+# params = cv2.SimpleBlobDetector_Params()
+# params.filterByArea = True
+# params.minArea = 1000
+# params.maxArea = 100000
+# params.filterByCircularity = False
+# params.filterByConvexity = False  # Disabled for broader detection
+# params.filterByInertia = False  # Disabled for flexibility
 
-detector = cv2.SimpleBlobDetector_create(params)
+# detector = cv2.SimpleBlobDetector_create(params)
 
-# Detect blobs
-keypoints = detector.detect(tmt_binary)
-# Define colors for different blobs (cycle through red, green, blue)
-colors = [(0, 0, 255), (0, 255, 0), (255, 0, 0)]  # BGR format
+# # Detect blobs
+# keypoints = detector.detect(tmt_binary)
+# # Define colors for different blobs (cycle through red, green, blue)
+# colors = [(0, 0, 255), (0, 255, 0), (255, 0, 0)]  # BGR format
 
-print(keypoints)
+# print(keypoints)
 
-# Draw each blob with a different color
-for i, kp in enumerate(keypoints):
-    color = colors[i % len(colors)]
-    center = (int(kp.pt[0]), int(kp.pt[1]))
-    radius = int(kp.size / 2)
-    cv2.circle(tmt, center, radius, color, 10)  # Draw circle outline
-# Save or display result
-cv2.imwrite('blobs_detected.jpg', tmt)
+# # Draw each blob with a different color
+# for i, kp in enumerate(keypoints):
+#     color = colors[i % len(colors)]
+#     center = (int(kp.pt[0]), int(kp.pt[1]))
+#     radius = int(kp.size / 2)
+#     cv2.circle(tmt, center, radius, color, 10)  # Draw circle outline
+# # Save or display result
+# cv2.imwrite('blobs_detected.jpg', tmt)
 

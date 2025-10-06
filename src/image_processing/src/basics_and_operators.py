@@ -183,21 +183,21 @@ gray_dog = cv2.cvtColor(meme_dog, cv2.COLOR_BGR2GRAY)
 # ### Morphological Operators
 # ## Boundary detection
 # # Binarize image (threshold to create a binary mask)
-_, binary = cv2.threshold(gray_dog, 127, 255, cv2.THRESH_BINARY)
-cv2.imwrite('thresholded_img.jpg', binary)
+# _, binary = cv2.threshold(gray_dog, 127, 255, cv2.THRESH_BINARY)
+# cv2.imwrite('thresholded_img.jpg', binary)
 
-# Define circular structuring element (approximated as a disk)
-radius = 5
-se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*radius+1, 2*radius+1))
+# # Define circular structuring element (approximated as a disk)
+# radius = 5
+# se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*radius+1, 2*radius+1))
 
-# Erode the binary image
-eroded = cv2.erode(binary, se)
-cv2.imwrite('eroded_img.jpg', eroded)
+# # Erode the binary image
+# eroded = cv2.erode(binary, se)
+# cv2.imwrite('eroded_img.jpg', eroded)
 
-# # Compute boundary (original - eroded)
-boundary = binary - eroded
+# # # Compute boundary (original - eroded)
+# boundary = binary - eroded
 
-# # Save result
-cv2.imwrite('boundaries_morphological.jpg', boundary)
+# # # Save result
+# cv2.imwrite('boundaries_morphological.jpg', boundary)
 
 
