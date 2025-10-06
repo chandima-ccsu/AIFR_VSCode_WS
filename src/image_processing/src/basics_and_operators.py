@@ -120,20 +120,20 @@ gray_dog = cv2.cvtColor(meme_dog, cv2.COLOR_BGR2GRAY)
 # sobel_x = np.array([[0.125, 0, -0.125], [-0.25, 0, 0.25], [-0.125, 0, 0.125]])
 # sobel_y = np.array([[-0.125, -0.25, -0.125], [0, 0, 0], [0.125, 0.25, 0.125]])
 
-# # Apply Sobel kernels
+# # # Apply Sobel kernels
 # edges_x = cv2.filter2D(gray_dog, -1, sobel_x)
 # edges_y = cv2.filter2D(gray_dog, -1, sobel_y)
 
-# # Combine edges (\sqrt(x^2 +))
+# # # Combine edges (\sqrt(x^2 +y^2))
 # edges = np.sqrt(np.square(edges_x) + np.square(edges_y)).astype(np.uint8)
 
-# # Normalize to 0-255 range for better visibility
+# # # Normalize to 0-255 range for better visibility
 # edges = cv2.normalize(edges, None, 0, 255, cv2.NORM_MINMAX)
 
 # cv2.imwrite('sobel_edges.jpg', edges)
 
 
-# Gaussian kernels with 2nd derivative laplanced.
+# # Gaussian kernels with 2nd derivative laplanced.
 # kernel = np.array([[2,4,5,4,2],
 #                    [4,9,12,9,4],
 #                    [5,12,15,12,5],
@@ -152,45 +152,52 @@ gray_dog = cv2.cvtColor(meme_dog, cv2.COLOR_BGR2GRAY)
 # sobel_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
 # sobel_y = np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]])
 
-# # Define 5x5 Gaussian kernel
-# gaussian = cv2.getGaussianKernel(5, sigma=1.0)
+# # # Define 5x5 Gaussian kernel
+# gaussian = cv2.getGaussianKernel(5, sigma=0.1)
 # gaussian = gaussian @ gaussian.T  # Create 5x5 kernel
+
+# print(gaussian)
+# # Apply the Gaussian to meme dog
+# gaussian_meme_dog = cv2.filter2D(gray_dog, -1, gaussian)
+# cv2.imwrite('guassian_meme_dog.png', gaussian_meme_dog)
+# cv2.imwrite('gray_meme_dog.png',gray_dog)
 
 # # Convolve Sobel and Gaussian kernels
 # kernel_x = convolve2d(sobel_x, gaussian, mode='same')
 # kernel_y = convolve2d(sobel_y, gaussian, mode='same')
 
-# # Apply convolved kernels
+# # # Apply convolved kernels
 # edges_x = cv2.filter2D(gray_dog, cv2.CV_32F, kernel_x)
 # edges_y = cv2.filter2D(gray_dog, cv2.CV_32F, kernel_y)
 
-# # Compute edge magnitude
+# # # Compute edge magnitude
 # edges = np.sqrt(np.square(edges_x) + np.square(edges_y))
 
-# # Normalize to 0-255
+# # # Normalize to 0-255
 # edges = cv2.normalize(edges, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
 
-# # Save result
-# cv2.imwrite('sobel_gaussian_edges.jpg', edges)
+# # # Save result
+# cv2.imwrite('sobel_gaussian_edges_01.jpg', edges)
 
 
 # ### Morphological Operators
 # ## Boundary detection
 # # Binarize image (threshold to create a binary mask)
-# _, binary = cv2.threshold(gray_dog, 127, 255, cv2.THRESH_BINARY)
-# cv2.imwrite('thresholded_img.jpg', binary)
+_, binary = cv2.threshold(gray_dog, 127, 255, cv2.THRESH_BINARY)
+cv2.imwrite('thresholded_img.jpg', binary)
 
-# # Define circular structuring element (approximated as a disk)
-# radius = 5
-# se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*radius+1, 2*radius+1))
+# Define circular structuring element (approximated as a disk)
+radius = 5
+se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*radius+1, 2*radius+1))
 
-# # Erode the binary image
-# eroded = cv2.erode(binary, se)
+# Erode the binary image
+eroded = cv2.erode(binary, se)
+cv2.imwrite('eroded_img.jpg', eroded)
 
 # # Compute boundary (original - eroded)
-# boundary = binary - eroded
+boundary = binary - eroded
 
 # # Save result
-# cv2.imwrite('boundaries_morphological.jpg', boundary)
+cv2.imwrite('boundaries_morphological.jpg', boundary)
 
 
