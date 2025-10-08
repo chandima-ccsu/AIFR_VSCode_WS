@@ -3,9 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pdb
 
-# img = cv2.imread('/workspaces/base_ros2/src/image_processing/images/sign.jpg')
-# gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # Converts to grayscale
-
+img = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg')
+# # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # Converts to grayscale
+# gray = img[:,:,2] 
 # ### Examin the pixel-value histogram
 # hist = cv2.calcHist([gray], [0], None, [256], [0, 256])
 # plt.plot(hist)
@@ -15,10 +15,10 @@ import pdb
 # plt.savefig('histogram.png')
 # plt.close()
 
-# # Set threshold
-# threshold = 100
+# # # Set threshold
+# threshold = 170
 
-# # # Apply binary thresholding
+# # # # Apply binary thresholding
 # gray[gray > threshold] = 255
 # gray[gray <= threshold] = 0
 
@@ -29,33 +29,34 @@ import pdb
 
 # tmt = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg')
 
-# # Convert the BGR image to LAB
+# # # Convert the BGR image to LAB
 # lab_tmt = cv2.cvtColor(tmt, cv2.COLOR_BGR2LAB)
 
-# # Extract a* and b* planes (2-channel image)
+# # # Extract a* and b* planes (2-channel image)
 # ab_tmt = lab_tmt[:, :, 1:3]  # Shape: (height, width, 2)_tmt
+# b_tmt = lab_tmt[:, :, 1:2]  # Shape: (height, width, 2)_tmt
 
-# # Create a dummy L* channel with neutral value 50, matching the shape of the first channel of ab_tmt
+# # # Create a dummy L* channel with neutral value 50, matching the shape of the first channel of ab_tmt
 # l_channel = np.full_like(ab_tmt[:, :, 0:1], 50)
 
-# # Concatenate the dummy L* channel with ab_tmt along the third axis to form a 3-channel L*a*b* image
+# # # Concatenate the dummy L* channel with ab_tmt along the third axis to form a 3-channel L*a*b* image
 # lab_dummy = np.concatenate((l_channel, ab_tmt), axis=2)
 
-# # Convert the L*a*b* image back to BGR and save it as 'ab_tmt.jpg'
+# # # Convert the L*a*b* image back to BGR and save it as 'ab_tmt.jpg'
 # cv2.imwrite('ab_tmt.jpg', cv2.cvtColor(lab_dummy, cv2.COLOR_Lab2BGR))
 
-# # Commented out: Calculate histogram of b_tmt (grayscale image)
-# # hist = cv2.calcHist([b_tmt], [0], None, [256], [0, 256])
+# # # Commented out: Calculate histogram of b_tmt (grayscale image)
+# hist = cv2.calcHist([b_tmt], [0], None, [256], [0, 256])
 
 # # Commented out: Plot histogram
-# # plt.plot(hist)
-# # plt.title('Grayscale Histogram')
-# # plt.xlabel('Pixel Value')
-# # plt.ylabel('Frequency')
-# # plt.savefig('b_tmt_hist.png')
-# # plt.close()
+# plt.plot(hist)
+# plt.title('Grayscale Histogram')
+# plt.xlabel('Pixel Value')
+# plt.ylabel('Frequency')
+# plt.savefig('b_tmt_hist.png')
+# plt.close()
 
-# # Get height and width from ab_tmt shape (excluding channel dimension)
+# # # Get height and width from ab_tmt shape (excluding channel dimension)
 # height, width = ab_tmt.shape[:2]
 
 # # Reshape ab_tmt into a 2D array of a*b* points for k-means clustering
@@ -100,27 +101,35 @@ import pdb
 # cv2.imwrite('tmt_masked.jpg', masked_tmt)
 
 
-## Object Instance Representation
+# ## Object Instance Representation
 
-# tmt_binary = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg', cv2.IMREAD_GRAYSCALE)
+# # tmt_binary = cv2.imread('/workspaces/base_ros2/tmt_masked.jpg', cv2.IMREAD_GRAYSCALE)
+# # tmt_binary = cv2.imread('/workspaces/base_ros2/src/image_processing/images/tomatoes.jpg', cv2.IMREAD_GRAYSCALE)
+
+# tmt_binary = mask_eroded.copy()
+# _, tmt_binary = cv2.threshold(tmt_binary, 127,255, cv2.THRESH_BINARY)
+# # tmt = cv2.imread('/workspaces/base_ros2/tmt_masked.jpg')
+
+# cv2.imwrite('tmt_binay.jpg', tmt_binary)
 
 # # Detect blobs using SimpleBlobDetector
 # params = cv2.SimpleBlobDetector_Params()
 # params.filterByArea = True
 # params.minArea = 1000
-# params.maxArea = 100000
+# params.maxArea = 200000
+# params.minCircularity = 0.3
 # params.filterByCircularity = False
 # params.filterByConvexity = False  # Disabled for broader detection
 # params.filterByInertia = False  # Disabled for flexibility
 
 # detector = cv2.SimpleBlobDetector_create(params)
 
-# # Detect blobs
+# # # Detect blobs
 # keypoints = detector.detect(tmt_binary)
 # # Define colors for different blobs (cycle through red, green, blue)
 # colors = [(0, 0, 255), (0, 255, 0), (255, 0, 0)]  # BGR format
 
-# print(keypoints)
+# # print(keypoints)
 
 # # Draw each blob with a different color
 # for i, kp in enumerate(keypoints):

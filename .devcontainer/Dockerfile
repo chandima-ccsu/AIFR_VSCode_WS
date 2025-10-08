@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     fluxbox \
     novnc \
     net-tools \
+    ffmpeg \
     # Add other ROS 2 dependencies as needed
     && apt-get autoremove -y \
     && apt-get clean -y \
