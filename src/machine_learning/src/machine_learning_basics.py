@@ -1,3 +1,4 @@
+## Linear Regression
 # import numpy as np
 # import matplotlib.pyplot as plt
 
@@ -38,7 +39,7 @@
 
 # print(f"Slope (w): {w_optimal:.2f}")
 
-
+# ## Capacity
 # import numpy as np
 # import matplotlib.pyplot as plt
 
@@ -89,7 +90,7 @@
 # plt.close()
 
 
-
+## Regularization
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.linalg import inv
@@ -98,6 +99,7 @@ from numpy.linalg import inv
 np.random.seed(0)
 x = np.linspace(-5, 5, 20)
 y = x**2 + np.sin(x) + np.random.normal(0, 1, len(x))
+y[8] = 20
 
 # Polynomial features (degree 9, 10 terms)
 X = np.column_stack([x**i for i in range(10)])  # [1, x, x^2, ..., x^9]
@@ -112,7 +114,7 @@ def ridge_regression(X, y, lambda_reg):
     return w
 
 # Vary lambda and compute
-lambdas = [0.0, 10, 100]
+lambdas = [0.0, 10]
 for lam in lambdas:
     w = ridge_regression(X, y, lam)
     y_pred = X @ w
