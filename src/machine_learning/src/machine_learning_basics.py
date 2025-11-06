@@ -1,4 +1,4 @@
-## Linear Regression
+# # Linear Regression
 # import numpy as np
 # import matplotlib.pyplot as plt
 
@@ -138,4 +138,3 @@ plt.legend()
 plt.grid(True)
 plt.savefig('L2_nonlinear_degree9.png')
 plt.close()
-
